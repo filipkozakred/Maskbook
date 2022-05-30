@@ -17,7 +17,7 @@ export class MaskWalletProvider extends BaseProvider implements EVM_Provider {
 
     constructor() {
         super()
-        Web3StateSettings.readyPromise.then(this.addShareContextListeners.bind(this))
+        Web3StateSettings.readyPromise.then(this.addSharedContextListeners.bind(this))
     }
 
     /**
@@ -42,7 +42,7 @@ export class MaskWalletProvider extends BaseProvider implements EVM_Provider {
         })
     }
 
-    private addShareContextListeners() {
+    private addSharedContextListeners() {
         const sharedContext = SharedContextSettings.value
 
         sharedContext.chainId.subscribe(() => {

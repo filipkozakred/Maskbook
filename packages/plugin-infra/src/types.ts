@@ -176,11 +176,6 @@ export namespace Plugin.Shared {
         updateWallet(id: string, wallet: Partial<Wallet>): Promise<void>
         /** Remove a old wallet */
         removeWallet(id: string, password?: string): Promise<void>
-
-        /** get the latest unconfirmed request */
-        shiftUnconfirmedRequest(): Promise<JsonRpcPayload | undefined>
-        /** add an unconfirmed request */
-        pushUnconfirmedRequest(payload: JsonRpcPayload): Promise<JsonRpcPayload>
     }
     export interface Definition<ChainId = unknown, ProviderType = unknown, NetworkType = unknown> {
         /**
