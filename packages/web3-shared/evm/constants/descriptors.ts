@@ -294,6 +294,21 @@ export const PROVIDER_DESCRIPTORS: Array<ProviderDescriptor<ChainId, ProviderTyp
         downloadLink: 'https://mathwallet.org/en-us/#extension',
     },
     {
+        ID: `${PLUGIN_ID}_opera`,
+        providerAdaptorPluginID: PLUGIN_ID,
+        type: ProviderType.Opera,
+        name: 'Opera',
+        icon: new URL('../assets/opera.png', import.meta.url),
+        enableRequirements: {
+            supportedChainIds: getEnumAsArray(ChainId).map((x) => x.value),
+            supportedEnhanceableSites: getEnumAsArray(EnhanceableSite).map((x) => x.value),
+            supportedExtensionSites: getEnumAsArray(ExtensionSite).map((x) => x.value),
+        },
+        homeLink: 'https://www.opera.com/crypto/next',
+        shortenLink: 'opera.com',
+        downloadLink: 'https://www.opera.com/crypto/next',
+    },
+    {
         ID: `${PLUGIN_ID}_fortmatic`,
         providerAdaptorPluginID: PLUGIN_ID,
         type: ProviderType.Fortmatic,

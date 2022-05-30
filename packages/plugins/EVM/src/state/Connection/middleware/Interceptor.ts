@@ -12,6 +12,7 @@ export class Interceptor implements Middleware<Context> {
         [ProviderType.Coin98]: new MetaMask(),
         [ProviderType.WalletLink]: new MetaMask(),
         [ProviderType.MathWallet]: new MetaMask(),
+        [ProviderType.Opera]: new MetaMask(),
         [ProviderType.Fortmatic]: new MetaMask(),
     }
 

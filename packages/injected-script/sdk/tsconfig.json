@@ -14,7 +14,8 @@
     "MetaMask.ts",
     "MathWallet.ts",
     "WalletLink.ts",
-    "utils.ts"
+    "utils.ts",
+    "Opera.ts"
   ],
   "references": [{ "path": "../shared/" }]
 }
