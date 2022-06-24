@@ -7,7 +7,7 @@ import { DialogContent } from '@mui/material'
 import { useRemoteControlledDialog } from '@masknet/shared-base-ui'
 import { InjectedDialog } from '@masknet/shared'
 import { AllProviderTradeContext } from '../../trader/useAllProviderTradeContext'
-import { TargetChainIdContext } from '../../trader/useTargetChainIdContext'
+import { TargetChainIdContext } from '@masknet/plugin-infra/web3-evm'
 import { PluginTraderMessages } from '../../messages'
 import { Trader, TraderProps } from './Trader'
 import { useI18N } from '../../../../utils'
@@ -114,12 +114,13 @@ export function TraderDialog({ open, onClose }: TraderDialogProps) {
                         <div className={classes.abstractTabWrapper}>
                             <NetworkTab
                                 chainId={chainId}
+                                /* @ts-ignore */
                                 setChainId={setChainId}
                                 classes={classes}
                                 chains={chainIdList}
                             />
                         </div>
-                        <Trader {...traderProps} chainId={chainId} classes={{ root: classes.tradeRoot }} />
+                        <Trader chainId={chainId} {...traderProps} classes={{ root: classes.tradeRoot }} />
                     </DialogContent>
                 </InjectedDialog>
             </AllProviderTradeContext.Provider>

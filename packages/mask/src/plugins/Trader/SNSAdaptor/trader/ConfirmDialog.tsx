@@ -20,7 +20,7 @@ import { ExternalLink } from 'react-feather'
 import { useUpdateEffect } from 'react-use'
 import { useI18N } from '../../../../utils'
 import { FungibleToken, isZero, multipliedBy, NetworkPluginID, formatBalance, Wallet } from '@masknet/web3-shared-base'
-import { TargetChainIdContext } from '../../trader/useTargetChainIdContext'
+import { TargetChainIdContext } from '@masknet/plugin-infra/web3-evm'
 import { currentSlippageSettings } from '../../settings'
 import { useNativeTokenPrice } from '@masknet/plugin-infra/web3'
 import { ONE_BIPS } from '../../constants'
@@ -125,11 +125,12 @@ export interface ConfirmDialogUIProps extends withClasses<never> {
     onConfirm: () => void
     onClose?: () => void
     wallet?: Wallet | null
+    account?: string
 }
 
 export function ConfirmDialogUI(props: ConfirmDialogUIProps) {
     const { t } = useI18N()
-    const { open, trade, wallet, inputToken, outputToken, onConfirm, onClose, gas, gasPrice } = props
+    const { open, trade, wallet, inputToken, outputToken, onConfirm, onClose, gas, gasPrice, account } = props
 
     const [cacheTrade, setCacheTrade] = useState<TradeComputed | undefined>()
     const [priceUpdated, setPriceUpdated] = useState(false)
@@ -220,7 +221,11 @@ export function ConfirmDialogUI(props: ConfirmDialogUIProps) {
                     <Box className={classes.section}>
                         <Typography>{t('plugin_red_packet_nft_account_name')}</Typography>
                         <Typography>
-                            ({wallet?.name})
+                            {wallet?.name ? (
+                                `(${wallet.name})`
+                            ) : (
+                                <FormattedAddress address={account} size={10} formatter={formatEthereumAddress} />
+                            )}
                             <FormattedAddress
                                 address={wallet?.address ?? ''}
                                 size={4}
@@ -243,7 +248,7 @@ export function ConfirmDialogUI(props: ConfirmDialogUIProps) {
                             <TokenIcon
                                 classes={{ icon: classes.tokenIcon }}
                                 address={inputToken.address}
-                                logoURI={inputToken.logoURL}
+                                logoURL={inputToken.logoURL}
                             />
                             <FormattedBalance
                                 value={inputAmount.toFixed() ?? '0'}
@@ -260,7 +265,7 @@ export function ConfirmDialogUI(props: ConfirmDialogUIProps) {
                             <TokenIcon
                                 classes={{ icon: classes.tokenIcon }}
                                 address={outputToken.address}
-                                logoURI={outputToken.logoURL}
+                                logoURL={outputToken.logoURL}
                             />
                             <FormattedBalance
                                 value={outputAmount.toFixed() ?? '0'}
